@@ -136,7 +136,7 @@ clock = pygame.time.Clock()
 file2 = open('CoverPicture.dat', 'rb')
 CoverPicture = pickle.load(file2)
 file2.close()
-for pic in range(0, 185):
+for pic in range(0, CoverPicture[-1]):
     clock.tick(30)
     for event in pygame.event.get():
         if event.type == QUIT:
