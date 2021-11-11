@@ -1,5 +1,6 @@
 # 桥梁建造师@Pymunk-Pygame
 import copy
+import os
 import pickle
 from math import sin, cos, atan, asin, pi, fabs
 from sys import exit
@@ -171,12 +172,12 @@ class Game:
                      [[136, 136], [340, 340], [544, 272]],
                      [[120, 180], [225, 330], [435, 330], [540, 180]],
                      [[120, 180], [225, 330], [435, 330], [540, 180]],
-                     [[120, 255], [330, 330], [540, 255]],
+                     [[120, 255], [225, 330], [435, 330], [540, 255]],
                      [[104, 208], [182, 325], [468, 312], [572, 156]],
                      [[104, 208], [312, 312], [338, 312], [572, 156]],
                      [[104, 208], [416, 312], [442, 312], [572, 156]])
         # 基点数量
-        self.four_num = [3, 3, 4, 4, 3, 3, 4, 4, 3, 4, 4, 4]
+        self.four_num = [3, 3, 4, 4, 3, 3, 4, 4, 4, 4, 4, 4]
         # 栈桥部件列表
         self.edge = ([Bridge((0, 210), (168, 210), 2, 2), Bridge((504, 210), (624, 210), 2, 2)],
                      [Bridge((0, 210), (168, 210), 2, 2), Bridge((504, 126), (624, 126), 2, 2)],
@@ -1140,10 +1141,13 @@ def main():
         gap = (gap + 1) % 120
         pygame.display.update()
 
-        if bri.level == 9 and gap % 10 == 0 and bri.option == 4:
+        if gap % 10 == 0 and bri.option == 4:
             pygame.image.save(screen, f'screenshot/cover{screenshot}.png')
             screenshot += 1
 
 
 if __name__ == '__main__':
+    forder = os.path.exists("./screenshot")
+    if not forder:
+        os.mkdir('./screenshot')
     main()
