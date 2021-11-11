@@ -1,5 +1,6 @@
 import pygame
 import pickle
+import os
 
 pygame.init()
 
@@ -7,16 +8,20 @@ StringData = {}
 CoverPicture = []
 
 # 初始动画
-for pic in range(0, 185):
+pngs = os.listdir('./screenshot')
+pngs = [x for x in pngs if '.png' in x]
+nums = len(pngs)
+for pic in range(0, nums):
     picture = pygame.image.load(f'screenshot/cover{pic}.png')
     CoverPicture.append(pygame.image.tostring(picture, 'RGB'))
+CoverPicture.append(nums)
 
 # 封面
 icon = pygame.image.load('icon.png')  # 图标
 StringData['icon'] = pygame.image.tostring(icon, 'RGB')
 cover = pygame.image.load('screen/menu.png')  # 加载menu界面
 StringData['cover'] = pygame.image.tostring(cover, 'RGB')
-cover_back = pygame.image.load('screenshot/cover184.png')  # menu界面背景
+cover_back = pygame.image.load(f'screenshot/cover{nums - 1}.png')  # menu界面背景
 StringData['cover_back'] = pygame.image.tostring(cover_back, 'RGB')
 
 # 图标（以下均为png图）
