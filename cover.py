@@ -779,6 +779,13 @@ class Game:
                     surface.blit(point, point_p)
 
 
+def del_files(path):
+    ls = os.listdir(path)
+    for i in ls:
+        iPath = os.path.join(path, i)
+        os.remove(iPath)
+
+
 def main():
     bri = Game()
     # 主循环
@@ -836,6 +843,8 @@ def main():
                             bri.bridge_cpy1 = copy.deepcopy(bri.bridge)
                             bri.bridge.append(bri.edge[bri.level - 1][0])
                             bri.bridge.append(bri.edge[bri.level - 1][1])
+                            del_files('./screenshot')
+                            screenshot = 0
 
                         elif bri.option in (6, 7):  # 返回
                             bri.option = bri.option_cpy
@@ -1118,7 +1127,8 @@ def main():
                 menu_sound_init = 1
 
         # 显示图标
-        # bri.show_icon()
+        if bri.option != 4:
+            bri.show_icon()
         # 显示数据
         # bri.show_data()
 
@@ -1138,12 +1148,13 @@ def main():
         if bri.option in (5, 6, 7):
             screen.blit(surface2, (0, 0))
 
+        # 保存
+        if bri.option == 4 and gap % 10 == 0:
+            pygame.image.save(screen, f'./screenshot/cover{screenshot}.png')
+            screenshot += 1
+
         gap = (gap + 1) % 120
         pygame.display.update()
-
-        if gap % 10 == 0 and bri.option == 4:
-            pygame.image.save(screen, f'screenshot/cover{screenshot}.png')
-            screenshot += 1
 
 
 if __name__ == '__main__':
