@@ -21,7 +21,10 @@ icon = pygame.image.load('icon.png')  # 图标
 StringData['icon'] = pygame.image.tostring(icon, 'RGB')
 cover = pygame.image.load('screen/menu.png')  # 加载menu界面
 StringData['cover'] = pygame.image.tostring(cover, 'RGB')
-cover_back = pygame.image.load(f'screenshot/cover{nums - 1}.png')  # menu界面背景
+if cover:
+    cover_back = pygame.image.load(f'screenshot/cover{nums - 1}.png')  # menu界面背景
+else:
+    cover_back = pygame.image.load(f'screen/level1/background.png')
 StringData['cover_back'] = pygame.image.tostring(cover_back, 'RGB')
 
 # 图标（以下均为png图）
