@@ -24,14 +24,10 @@ class Bridge:
         self.force = fo
 
 
-file1 = open('StringData.dat', 'rb')
-StringData = pickle.load(file1)
-file1.close()
-
 # 窗口与图层
 screen = pygame.display.set_mode((625, 365))  # 窗口大小固定
 pygame.display.set_caption('桥梁建造师')  # 程序名称
-icon = pygame.image.fromstring(StringData['icon'], (32, 32), 'RGB')
+icon = pygame.image.load('icon.png')
 pygame.display.set_icon(icon)
 surface = screen.convert_alpha()  # 静态图层
 surface1 = screen.convert_alpha()  # 动态图层
@@ -39,55 +35,55 @@ surface2 = screen.convert_alpha()  # 帮助窗口
 surface3 = screen.convert_alpha()  # 应力显示图层
 
 # 封面背景
-cover = pygame.image.fromstring(StringData['cover'], (625, 741), 'RGB')  # 加载menu界面
+cover = pygame.image.load('screen/menu.png')  # 加载menu界面
 cover.set_alpha(180)  # 设置menu界面透明度（以显示背景）
-cover_back = pygame.image.fromstring(StringData['cover_back'], (625, 365), 'RGB')  # menu界面背景
+cover_back = pygame.image.load(f'screen/level1/background.png')  # menu界面背景
 
 # 图标（以下均为png图）
-point = pygame.image.fromstring(StringData['point'], (12, 12), 'RGB')
+point = pygame.image.load('screen/point.png')
 point.set_colorkey((255, 255, 255))  # 将白色背景设为透明，下同
-blocks = pygame.image.fromstring(StringData['blocks'], (42, 134), 'RGB')  # 三种建筑材料选项
+blocks = pygame.image.load('blocks/three_blocks.png')  # 三种建筑材料选项
 blocks.set_colorkey((255, 255, 255))
-steel = pygame.image.fromstring(StringData['steel'], (42, 42), 'RGB')
-wood = pygame.image.fromstring(StringData['wood'], (42, 42), 'RGB')
-road = pygame.image.fromstring(StringData['road'], (42, 42), 'RGB')
-begin = pygame.image.fromstring(StringData['begin'], (42, 42), 'RGB')
+steel = pygame.image.load('blocks/steel.png')
+wood = pygame.image.load('blocks/wood.png')
+road = pygame.image.load('blocks/road.png')
+begin = pygame.image.load('blocks/begin.png')
 begin.set_colorkey((255, 255, 255))
-begun = pygame.image.fromstring(StringData['begun'], (42, 42), 'RGB')
+begun = pygame.image.load('blocks/begun.png')
 begun.set_colorkey((255, 255, 255))
-tips = pygame.image.fromstring(StringData['tips'], (42, 42), 'RGB')
+tips = pygame.image.load('blocks/help.png')
 tips.set_colorkey((255, 255, 255))
-back = pygame.image.fromstring(StringData['back'], (42, 42), 'RGB')
+back = pygame.image.load('blocks/back.png')
 back.set_colorkey((255, 255, 255))
-Exit = pygame.image.fromstring(StringData['Exit'], (42, 42), 'RGB')
+Exit = pygame.image.load('blocks/exit.png')
 Exit.set_colorkey((255, 255, 255))
-Continue = pygame.image.fromstring(StringData['Continue'], (42, 42), 'RGB')
+Continue = pygame.image.load('blocks/continue.png')
 Continue.set_colorkey((255, 255, 255))
-Clear = pygame.image.fromstring(StringData['Clear'], (42, 42), 'RGB')
+Clear = pygame.image.load('blocks/clear.png')
 Clear.set_colorkey((255, 255, 255))
-Open = pygame.image.fromstring(StringData['Open'], (42, 42), 'RGB')
+Open = pygame.image.load('blocks/open.png')
 Open.set_colorkey((255, 255, 255))
-Save = pygame.image.fromstring(StringData['Save'], (42, 42), 'RGB')
+Save = pygame.image.load('blocks/save.png')
 Save.set_colorkey((255, 255, 255))
-home = pygame.image.fromstring(StringData['home'], (42, 42), 'RGB')
+home = pygame.image.load('blocks/home.png')
 home.set_colorkey((255, 255, 255))
-withdraw = pygame.image.fromstring(StringData['withdraw'], (42, 42), 'RGB')
+withdraw = pygame.image.load('blocks/withdraw.png')
 withdraw.set_colorkey((255, 255, 255))
-Clear1 = pygame.image.fromstring(StringData['Clear1'], (42, 42), 'RGB')
+Clear1 = pygame.image.load('blocks/clear1.png')
 Clear1.set_colorkey((255, 255, 255))
-Open1 = pygame.image.fromstring(StringData['Open1'], (42, 42), 'RGB')
+Open1 = pygame.image.load('blocks/open1.png')
 Open1.set_colorkey((255, 255, 255))
-Save1 = pygame.image.fromstring(StringData['Save1'], (42, 42), 'RGB')
+Save1 = pygame.image.load('blocks/save1.png')
 Save1.set_colorkey((255, 255, 255))
-home1 = pygame.image.fromstring(StringData['home1'], (42, 42), 'RGB')
+home1 = pygame.image.load('blocks/home1.png')
 home1.set_colorkey((255, 255, 255))
-withdraw1 = pygame.image.fromstring(StringData['withdraw1'], (42, 42), 'RGB')
+withdraw1 = pygame.image.load('blocks/withdraw1.png')
 withdraw1.set_colorkey((255, 255, 255))
-cloud_png = pygame.image.fromstring(StringData['cloud_png'], (109, 64), 'RGB')
+cloud_png = pygame.image.load(f'screen/cloud.png')
 cloud_png.set_colorkey((255, 255, 255))
-cloud1_png = pygame.image.fromstring(StringData['cloud1_png'], (80, 40), 'RGB')
+cloud1_png = pygame.image.load(f'screen/cloud1.png')
 cloud1_png.set_colorkey((255, 255, 255))
-cloud2_png = pygame.image.fromstring(StringData['cloud2_png'], (82, 49), 'RGB')
+cloud2_png = pygame.image.load(f'screen/cloud2.png')
 cloud2_png.set_colorkey((255, 255, 255))
 
 # 文本
@@ -988,17 +984,16 @@ def main():
                         # 车
                         bri.car[0] = bri.cars[bri.level - 1][0]
                         bri.car[1] = bri.cars[bri.level - 1][1]
-                        car_png = pygame.image.fromstring(StringData[f'car_png{bri.level}'],
-                                                          StringData[f'car_size'][bri.level - 1], 'RGB')
+                        car_png = pygame.image.load(f'screen\\level{bri.level}\\car.png')
 
                         # 游戏控件
                         bri.Button_tag = 0
-                        frame = pygame.image.fromstring(StringData[f'frame{bri.level}'], (625, 365), 'RGB')
+                        frame = pygame.image.load(f'screen\\level{bri.level}\\frame.png')
                         frame.set_colorkey((255, 255, 255))
                         frame.set_alpha(120)
-                        background = pygame.image.fromstring(StringData[f'background{bri.level}'], (625, 365), 'RGB')
+                        background = pygame.image.load(f'screen\\level{bri.level}\\background.png')
                         background.set_colorkey((255, 255, 255))
-                        bri.ok = pygame.image.fromstring(StringData[f'ok{bri.level}'], (625, 365), 'RGB')
+                        bri.ok = pygame.image.load(f'screen\\level{bri.level}\\ok.png')
                         mul = bri.cars_wide[bri.level - 1] / 21
 
             # 鼠标右键释放
@@ -1062,7 +1057,7 @@ def main():
                 surface2.blit(bri.budget_txt[i], (po_x, po_y + 75))
 
                 surface1.fill((255, 255, 255, 0))
-                cover_png = pygame.image.fromstring(StringData['cover_png'], (105, 105), 'RGB')
+                cover_png = pygame.image.load('screen\\1.png')
                 po_x = 104 + ((bri.Cover_tag - 1) % 3) * 156
                 po_y = 52 + (bri.Cover_tag - 1) // 3 * 156 - bri.slide
                 surface1.blit(cover_png, (po_x, po_y))
